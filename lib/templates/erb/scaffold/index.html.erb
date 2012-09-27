@@ -1,0 +1,35 @@
+<%%= title "<%= plural_table_name.capitalize %>" %>
+
+<%% if @<%= plural_table_name %>.any? %>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+  <% attributes.each do |attribute| -%>
+        <th><%= attribute.human_name %></th>
+  <% end -%>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+      <tr>
+  <% attributes.each do |attribute| -%>
+        <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+  <% end -%>
+        <td>
+          <ul class="actions">
+            <li><%%= link_to 'Detalhes', admin_<%= singular_table_name %>_path(<%= singular_table_name %>), <%= key_value :class, "'btn btn-mini btn-info'" %> %></li>
+            <li><%%= link_to 'Editar', edit_admin_<%= singular_table_name %>_path(<%= singular_table_name %>), <%= key_value :class, "'btn btn-mini'" %> %></li>
+            <li><%%= link_to 'Excluir', admin_<%= singular_table_name %>_path(<%= singular_table_name %>), <%= key_value :class, "'btn btn-mini btn-danger'" %>, <%= key_value :confirm, "'Tem certeza?'" %>, <%= key_value :method, ":delete" %> %></li>
+          </ul>
+        </td>
+      </tr>
+  <%% end %>
+    </tbody>
+  </table>
+<%% else %>
+  <p>Nenhum <%= human_name %> encontrado.</p>
+<%% end %>
+
+<%%= link_to 'Novo <%= human_name %>', new_admin_<%= singular_table_name %>_path, <%= key_value :class, "'btn btn-primary'" %> %>
