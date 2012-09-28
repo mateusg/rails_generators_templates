@@ -8,6 +8,7 @@
   </div>
 
   <div class="form-actions">
-    <%%= f.button :submit, nil, :class => 'btn btn-primary' %>
+    <%%= f.button :submit, nil, <%= key_value :class, "'btn btn-primary'" %> %>
+    <%%= link_to 'Voltar', <%= index_helper %>_path %>, <%= key_value :class, "'btn'" %>
   </div>
 <%% end %>
